@@ -37,6 +37,80 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
+        .menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .menu-icon {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 20;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .dropdown img {
+            width: 20px; /* Ukuran ikon */
+            height: 20px; /* Ukuran ikon */
+            margin-right: 10px; /* Jarak antara gambar dan teks */
+        }
+
+        .dropdown a:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: slideDown 0.8s ease;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
         .search-section {
             display: flex;
             justify-content: center;
@@ -342,6 +416,21 @@
             <p>Cuaca terkini di ujung jari Anda</p>
         </div>
 
+        <div class="menu" onclick="toggleDropdown(event)">
+            <div class="menu-icon">☰</div>
+            <div class="dropdown" id="dropdownMenu">
+                <a href="https://www.tiktok.com/@kenngapr" target="_blank">
+                    <img src="logo/tiktok.jpg" alt="TikTok"> TikTok
+                </a>
+                <a href="https://github.com/ken72185" target="_blank">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub"> GitHub
+                </a>
+                <a href="mailto:kenangga.ken@gmail.com">
+                    <img src="logo/email.png" alt="Email"> Email
+                </a>
+            </div>
+        </div>
+
         <div class="search-section">
             <div class="search-container">
                 <input type="text" class="search-input" placeholder="Cari kota atau lokasi..." id="searchInput">
@@ -358,8 +447,8 @@
     </div>
 
     <script>
-        // API Configuration - WeatherAPI
-        const API_KEY = '5c3a1fc741c7474cb74115751251407'; // Ganti dengan API key dari WeatherAPI.com
+                     // API Configuration - WeatherAPI
+                     const API_KEY = '5c3a1fc741c7474cb74115751251407'; // Ganti dengan API key dari WeatherAPI.com
         const BASE_URL = 'https://api.weatherapi.com/v1/';
         
         // Fungsi untuk mendapatkan icon cuaca
@@ -522,7 +611,7 @@
                         <div class="detail-item">
                             <div class="detail-icon">🏭</div>
                             <div class="detail-value">${current.air_quality}</div>
-                            <div class="detail-label">Kualitas Udara</div>
+                       <div class="detail-label">Kualitas Udara</div>
                         </div>
                     </div>
                     
@@ -658,6 +747,23 @@
         }
 
         updateBackground();
+
+        function toggleDropdown(event) {
+            event.stopPropagation(); // Mencegah event klik dari menyebar ke elemen lain
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Menutup dropdown jika klik di luar
+        window.onclick = function(event) {
+            const dropdown = document.getElementById('dropdownMenu');
+            if (event.target.closest('.menu') === null) {
+                dropdown.style.display = 'none';
+            }
+        }
+
+        // Inisialisasi dan fungsi lainnya...
+        // Pastikan untuk menambahkan kode JavaScript yang ada sebelumnya di sini
     </script>
 </body>
 </html>
